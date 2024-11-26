@@ -22,7 +22,7 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val notificationsButton: Button = view.findViewById(R.id.buttonNotifications)
+        val notificationsButton: Button = view.findViewById(R.id.btnNotifications)
 
         notificationsButton.setOnClickListener {
             handleNotificationsClick()

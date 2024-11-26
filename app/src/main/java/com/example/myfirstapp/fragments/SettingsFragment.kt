@@ -22,7 +22,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val settingsButton: Button = view.findViewById(R.id.buttonSettings)
+        val settingsButton: Button = view.findViewById(R.id.btnSettings)
 
         settingsButton.setOnClickListener {
             handleSettingsClick()

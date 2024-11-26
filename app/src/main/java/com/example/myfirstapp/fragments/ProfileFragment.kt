@@ -22,7 +22,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val profileButton: Button = view.findViewById(R.id.buttonProfile)
+        val profileButton: Button = view.findViewById(R.id.btnProfile)
 
         profileButton.setOnClickListener {
             handleProfileClick()

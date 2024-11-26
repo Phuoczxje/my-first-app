@@ -22,7 +22,7 @@ class FriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val friendsButton: Button = view.findViewById(R.id.buttonFriends)
+        val friendsButton: Button = view.findViewById(R.id.btnFriends)
 
         friendsButton.setOnClickListener {
             handleFriendsClick()
