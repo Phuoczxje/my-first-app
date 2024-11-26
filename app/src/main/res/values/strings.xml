@@ -6,4 +6,5 @@
     <string name="notificationsTitle">Notifications</string>
     <string name="profileTitle">Profile</string>
     <string name="settingsTitle">Settings</string>
+    <string name="productsTitle">Products</string>
 </resources>

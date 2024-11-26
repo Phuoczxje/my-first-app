@@ -9,10 +9,10 @@
     tools:context=".ProductsActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarProducts"
+        android:id="@+id/tbProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:popupTheme="@style/CardView.Light"
-        app:title="Products" />
+        app:title="@string/productsTitle" />
 
 </LinearLayout>

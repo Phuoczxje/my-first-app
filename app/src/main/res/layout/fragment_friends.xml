@@ -6,7 +6,7 @@
     tools:context=".fragments.FriendsFragment">
 
     <Button
-        android:id="@+id/buttonFriends"
+        android:id="@+id/btnFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

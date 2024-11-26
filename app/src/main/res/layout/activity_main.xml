@@ -9,14 +9,14 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMain"
+        android:id="@+id/tbMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:popupTheme="@style/CardView.Light"
         app:title="Main Activity" />
 
     <FrameLayout
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/fragContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
