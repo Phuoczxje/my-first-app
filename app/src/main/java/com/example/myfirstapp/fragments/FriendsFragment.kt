@@ -1,6 +1,6 @@
 package com.example.myfirstapp.fragments
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.myfirstapp.ProductsActivity
 import com.example.myfirstapp.R
-import com.example.myfirstapp.directToOtherActivity
 
 class FriendsFragment : Fragment() {
 
@@ -26,11 +25,12 @@ class FriendsFragment : Fragment() {
         val friendsButton: Button = view.findViewById(R.id.buttonFriends)
 
         friendsButton.setOnClickListener {
-            handleFriendsClick(requireContext())
+            handleFriendsClick()
         }
     }
 
-    private fun handleFriendsClick(context: Context) {
-        context.directToOtherActivity(ProductsActivity::class.java)
+    private fun handleFriendsClick() {
+        val intent = Intent(requireContext(), ProductsActivity::class.java)
+        startActivity(intent)
     }
 }

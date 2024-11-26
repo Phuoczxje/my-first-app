@@ -1,6 +1,6 @@
 package com.example.myfirstapp.fragments
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.myfirstapp.ProductsActivity
 import com.example.myfirstapp.R
-import com.example.myfirstapp.directToOtherActivity
 
 class ProfileFragment : Fragment() {
 
@@ -26,11 +25,12 @@ class ProfileFragment : Fragment() {
         val profileButton: Button = view.findViewById(R.id.buttonProfile)
 
         profileButton.setOnClickListener {
-            handleProfileClick(requireContext())
+            handleProfileClick()
         }
     }
 
-    private fun handleProfileClick(context: Context) {
-        context.directToOtherActivity(ProductsActivity::class.java)
+    private fun handleProfileClick() {
+        val intent = Intent(requireContext(), ProductsActivity::class.java)
+        startActivity(intent)
     }
 }
