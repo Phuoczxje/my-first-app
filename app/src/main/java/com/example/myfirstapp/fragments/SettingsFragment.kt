@@ -10,15 +10,14 @@ import com.example.myfirstapp.ProductsActivity
 import com.example.myfirstapp.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val view = binding.root
         return view
@@ -34,13 +33,8 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     private fun handleSettingsClick() {
-        val intent = Intent(requireContext(), ProductsActivity::class.java)
+        val intent = Intent(context, ProductsActivity::class.java)
         startActivity(intent)
     }
 }

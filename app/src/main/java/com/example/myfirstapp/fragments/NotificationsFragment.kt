@@ -10,15 +10,14 @@ import com.example.myfirstapp.ProductsActivity
 import com.example.myfirstapp.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {
-    private var _binding: FragmentNotificationsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentNotificationsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        binding = FragmentNotificationsBinding.inflate(inflater, container, false)
 
         val view = binding.root
         return view
@@ -34,13 +33,8 @@ class NotificationsFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     private fun handleNotificationsClick() {
-        val intent = Intent(requireContext(), ProductsActivity::class.java)
+        val intent = Intent(context, ProductsActivity::class.java)
         startActivity(intent)
     }
 }

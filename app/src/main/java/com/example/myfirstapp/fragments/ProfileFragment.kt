@@ -1,24 +1,26 @@
 package com.example.myfirstapp.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myfirstapp.ProductsActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.myfirstapp.databinding.FragmentProfileBinding
+import com.example.myfirstapp.viewmodels.UserViewModel
 
 class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentProfileBinding
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        userViewModel = ViewModelProvider(this@ProfileFragment)[UserViewModel::class.java]
 
         val view = binding.root
         return view
@@ -28,19 +30,30 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            btnProfile.setOnClickListener {
-                handleProfileClick()
+            btnUpdate.setOnClickListener {
+                handleUpdateClick()
             }
         }
+
+        userViewModel.getUserDetail("1")
+        observerUserData()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    private fun handleUpdateClick() {
+        userViewModel.
     }
 
+    /**
+     *
     private fun handleProfileClick() {
-        val intent = Intent(requireContext(), ProductsActivity::class.java)
-        startActivity(intent)
+    val intent = Intent(context, ProductsActivity::class.java)
+    startActivity(intent)
+    }
+     */
+
+    private fun observerUserData() {
+        userViewModel.userData.observe(viewLifecycleOwner, Observer { value ->
+            binding.tvName.text
+        })
     }
 }
