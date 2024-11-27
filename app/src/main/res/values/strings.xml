@@ -7,4 +7,5 @@
     <string name="profileTitle">Profile</string>
     <string name="settingsTitle">Settings</string>
     <string name="productsTitle">Products</string>
+    <string name="backDescription">Back Button</string>
 </resources>

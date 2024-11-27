@@ -11,12 +11,19 @@ import com.example.myfirstapp.fragments.FriendsFragment
 import com.example.myfirstapp.fragments.NotificationsFragment
 import com.example.myfirstapp.fragments.ProfileFragment
 import com.example.myfirstapp.fragments.SettingsFragment
-
-private const val NUM_PAGES = 4
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : FragmentActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPager: ViewPager2
+    private lateinit var tabLayout: TabLayout
+    private val fragmentMap = mapOf(
+        "Profile" to ProfileFragment(),
+        "Friends" to FriendsFragment(),
+        "Notifications" to NotificationsFragment(),
+        "Settings" to SettingsFragment()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,37 +32,35 @@ class MainActivity : FragmentActivity() {
         setContentView(view)
 
         viewPager = binding.pagerMain
+        tabLayout = binding.tabLayout
 
         val pagerAdapter = MainPagerAdapter(this)
         viewPager.adapter = pagerAdapter
 
+        setupTabLayoutWithPager()
         handleOnBackPressed()
     }
 
-    private inner class MainPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = NUM_PAGES
-
-        override fun createFragment(position: Int): Fragment {
-            return when (position) {
-                1 -> ProfileFragment()
-                2 -> FriendsFragment()
-                3 -> NotificationsFragment()
-                4 -> SettingsFragment()
-                else -> ProfileFragment()
-            }
-        }
+    private fun setupTabLayoutWithPager() {
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = fragmentMap.keys.elementAt(position)
+        }.attach()
     }
 
     private fun handleOnBackPressed() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (viewPager.currentItem == 0) {
-                    finish()
-                } else {
-                    viewPager.currentItem -= 1
-                }
+
             }
         })
+    }
+
+    private inner class MainPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = fragmentMap.size
+
+        override fun createFragment(position: Int): Fragment {
+            return fragmentMap.values.elementAt(position)
+        }
     }
 }
 

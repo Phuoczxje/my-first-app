@@ -7,4 +7,24 @@
     android:orientation="vertical"
     tools:context=".ProductsActivity">
 
+    <LinearLayout
+        android:id="@+id/linearToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:background="@color/cardview_dark_background"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10dp">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_5dp"
+            android:clickable="true"
+            android:contentDescription="@string/backDescription"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+    </LinearLayout>
+
 </LinearLayout>
