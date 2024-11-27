@@ -5,28 +5,38 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.myfirstapp.ProductsActivity
-import com.example.myfirstapp.R
+import com.example.myfirstapp.databinding.FragmentFriendsBinding
 
 class FriendsFragment : Fragment() {
+    private var _binding: FragmentFriendsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_friends, container, false)
+        _binding = FragmentFriendsBinding.inflate(inflater, container, false)
+
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val friendsButton: Button = view.findViewById(R.id.btnFriends)
-
-        friendsButton.setOnClickListener {
-            handleFriendsClick()
+        binding.apply {
+            btnFriends.setOnClickListener {
+                handleFriendsClick()
+            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun handleFriendsClick() {

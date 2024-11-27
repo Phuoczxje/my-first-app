@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearProducts"
+    android:id="@+id/lnProducts"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ProductsActivity">
 
     <LinearLayout
-        android:id="@+id/linearToolbar"
+        android:id="@+id/lnMain"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_56dp"
         android:background="@color/cardview_dark_background"
@@ -25,6 +25,7 @@
             android:contentDescription="@string/backDescription"
             android:focusable="true"
             android:src="@drawable/ic_back" />
+
     </LinearLayout>
 
 </LinearLayout>
