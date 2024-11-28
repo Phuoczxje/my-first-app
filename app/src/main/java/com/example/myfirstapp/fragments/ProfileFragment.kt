@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.myfirstapp.databinding.FragmentProfileBinding
 import com.example.myfirstapp.viewmodels.UserViewModel
+import org.koin.android.ext.android.inject
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var userViewModel: UserViewModel
+    private val userViewModel: UserViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,7 +20,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        userViewModel = ViewModelProvider(this@ProfileFragment)[UserViewModel::class.java]
 
         val view = binding.root
         return view

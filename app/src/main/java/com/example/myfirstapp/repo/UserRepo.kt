@@ -1,10 +1,10 @@
-package com.example.myfirstapp.repositories
+package com.example.myfirstapp.repo
 
 import androidx.lifecycle.MutableLiveData
 import com.example.myfirstapp.models.UserModel
 
 class UserRepo {
-    private var userData = UserModel("1", "Nguyễn Văn A", "00000000")
+    private val userData = UserModel("1", "Nguyễn Văn A", "00000000")
 
     fun getUsername() =
         MutableLiveData<UserModel>().apply {

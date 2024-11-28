@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myfirstapp.ProductsActivity
+import com.example.myfirstapp.activities.ProductsActivity
 import com.example.myfirstapp.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {

@@ -1,9 +1,10 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.activities
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.myfirstapp.R
 import com.example.myfirstapp.databinding.ActivityMainBinding
 import com.example.myfirstapp.fragments.FriendsFragment
 import com.example.myfirstapp.fragments.NotificationsFragment
