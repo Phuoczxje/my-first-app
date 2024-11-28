@@ -35,25 +35,23 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        userViewModel.getUserDetail("1")
         observerUserData()
+        userViewModel.getUsername()
     }
 
     private fun handleUpdateClick() {
-        userViewModel.
+        val name = binding.edtName.text.toString().trim()
+        if (name.isNotBlank()) {
+            userViewModel.updateUsername(name)
+        }
     }
-
-    /**
-     *
-    private fun handleProfileClick() {
-    val intent = Intent(context, ProductsActivity::class.java)
-    startActivity(intent)
-    }
-     */
 
     private fun observerUserData() {
         userViewModel.userData.observe(viewLifecycleOwner, Observer { value ->
-            binding.tvName.text
+            value?.apply {
+                binding.tvName.text = value.name
+                binding.edtName.setText("")
+            }
         })
     }
 }
