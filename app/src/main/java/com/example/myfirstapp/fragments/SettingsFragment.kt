@@ -31,6 +31,8 @@ class SettingsFragment : Fragment() {
                 handleSettingsClick()
             }
         }
+
+        
     }
 
     private fun handleSettingsClick() {

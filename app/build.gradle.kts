@@ -54,7 +54,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.androidx.viewpager2)
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(libs.koin.core.viewmodel)
+    implementation(libs.koin.core.viewmodel.v410beta1)
+    implementation(libs.koin.core.v410beta1)
+    implementation(libs.koin.android.v410beta1)
 }
