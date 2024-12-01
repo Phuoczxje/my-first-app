@@ -3,21 +3,39 @@ package com.example.myfirstapp.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfirstapp.models.UserModel
+import androidx.lifecycle.viewModelScope
+import com.example.myfirstapp.models.User
 import com.example.myfirstapp.repo.UserRepo
+import kotlinx.coroutines.launch
 
 class UserViewModel(private val userRepo: UserRepo) : ViewModel() {
-    private val _userData = MutableLiveData<UserModel?>()
+    private val _userLiveData = MutableLiveData<User?>()
+    val userLiveData: LiveData<User?> = _userLiveData
 
-    val userData: LiveData<UserModel?> = _userData
+    private val _userListLiveData = MutableLiveData<List<User>?>()
+    val userListLiveData: LiveData<List<User>?> = _userListLiveData
 
-    fun getUsername() =
-        _userData.apply {
-            value = userRepo.getUsername().value
+    fun getUsers() {
+        viewModelScope.launch {
+            userRepo.getUsers().collect { userList ->
+                _userListLiveData.value = userList
+            }
         }
+    }
 
-    fun updateUsername(name: String) =
-        _userData.apply {
-            value = userRepo.updateUsername(name).value
+    fun getUsername(id: Int) {
+        viewModelScope.launch {
+            userRepo.getUser(id).collect { user ->
+                _userLiveData.value = user
+            }
         }
+    }
+
+    fun updateUser(id: Int, updateUser: User) {
+        viewModelScope.launch {
+            userRepo.updateUser(id, updateUser).collect { user ->
+                _userLiveData.value = user
+            }
+        }
+    }
 }

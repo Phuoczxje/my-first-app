@@ -1,19 +1,28 @@
 package com.example.myfirstapp.repo
 
-import androidx.lifecycle.MutableLiveData
-import com.example.myfirstapp.models.UserModel
+import com.example.myfirstapp.models.User
+import com.example.myfirstapp.services.ApiService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class UserRepo {
-    private val userData = UserModel("1", "Nguyễn Văn A", "00000000")
-
-    fun getUsername() =
-        MutableLiveData<UserModel>().apply {
-            value = userData
+class UserRepo(
+    private val api: ApiService
+) {
+    fun getUsers(): Flow<List<User>> {
+        return flow {
+            emit(api.getUsers())
         }
+    }
 
-    fun updateUsername(name: String) =
-        MutableLiveData<UserModel>().apply {
-            userData.name = name
-            value = userData
+    fun getUser(id: Int): Flow<User?> {
+        return flow {
+            emit(api.getUser(id))
         }
+    }
+
+    fun updateUser(id: Int, updateUser: User): Flow<User?> {
+        return flow {
+            emit(api.updateUser(id, updateUser))
+        }
+    }
 }

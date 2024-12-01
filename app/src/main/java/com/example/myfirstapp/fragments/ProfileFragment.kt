@@ -35,20 +35,27 @@ class ProfileFragment : Fragment() {
         }
 
         observerUserData()
-        userViewModel.getUsername()
+        userViewModel.getUsername(1)
     }
 
     private fun handleUpdateClick() {
         val name = binding.edtName.text.toString().trim()
-        if (name.isNotBlank()) {
-            userViewModel.updateUsername(name)
+
+        if (name.isBlank()) {
+            return
+        }
+
+        val updateUser = userViewModel.userLiveData.value?.copy(name = name)
+
+        updateUser?.let {
+            userViewModel.updateUser(1, updateUser)
         }
     }
 
     private fun observerUserData() {
-        userViewModel.userData.observe(viewLifecycleOwner, Observer { value ->
-            value?.apply {
-                binding.tvName.text = value.name
+        userViewModel.userLiveData.observe(viewLifecycleOwner, Observer { user ->
+            user?.let {
+                binding.tvName.text = user.name
                 binding.edtName.setText("")
             }
         })

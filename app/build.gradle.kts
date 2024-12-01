@@ -57,4 +57,8 @@ dependencies {
     implementation(libs.koin.core.viewmodel.v410beta1)
     implementation(libs.koin.core.v410beta1)
     implementation(libs.koin.android.v410beta1)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.okhttp)
 }
