@@ -1,4 +1,4 @@
-package com.example.myfirstapp.fragments
+package com.example.myfirstapp.screens.main.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,18 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myfirstapp.activities.ProductsActivity
-import com.example.myfirstapp.databinding.FragmentNotificationsBinding
+import com.example.myfirstapp.databinding.FragmentSettingsBinding
+import com.example.myfirstapp.screens.products.ui.ProductsActivity
 
-class NotificationsFragment : Fragment() {
-    private lateinit var binding: FragmentNotificationsBinding
+class SettingsFragment : Fragment() {
+    private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val view = binding.root
         return view
@@ -27,13 +27,15 @@ class NotificationsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            btnNotifications.setOnClickListener {
-                handleNotificationsClick()
+            btnSettings.setOnClickListener {
+                handleSettingsClick()
             }
         }
+
+
     }
 
-    private fun handleNotificationsClick() {
+    private fun handleSettingsClick() {
         val intent = Intent(context, ProductsActivity::class.java)
         startActivity(intent)
     }

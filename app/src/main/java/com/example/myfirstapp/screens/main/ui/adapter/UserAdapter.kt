@@ -1,10 +1,10 @@
-package com.example.myfirstapp.adapters
+package com.example.myfirstapp.screens.main.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapp.databinding.UserItemBinding
-import com.example.myfirstapp.models.User
+import com.example.myfirstapp.screens.main.data.models.User
 
 class UserAdapter(private var items: List<User>) :
     RecyclerView.Adapter<UserAdapter.ItemViewHolder>() {
@@ -19,22 +19,16 @@ class UserAdapter(private var items: List<User>) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val user = items[position]
-        holder.binItem(user)
+        holder.binItem(items[position])
     }
 
     override fun getItemCount(): Int = items.size
 
-    fun updateUsers(newUsers: List<User>) {
-        this.items = newUsers
-        notifyDataSetChanged()
-    }
-
     inner class ItemViewHolder(binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun binItem(item: User) {
             binding.apply {
-                itemName.text = item.name
-                itemEmail.text = item.email
+                tvName.text = item.name
+                tvEmail.text = item.email
             }
         }
     }

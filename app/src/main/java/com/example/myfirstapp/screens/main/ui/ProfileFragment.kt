@@ -1,18 +1,16 @@
-package com.example.myfirstapp.fragments
+package com.example.myfirstapp.screens.main.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.example.myfirstapp.databinding.FragmentProfileBinding
-import com.example.myfirstapp.viewmodels.UserViewModel
 import org.koin.android.ext.android.inject
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private val userViewModel: UserViewModel by inject()
+    private val userViewModel by inject<UserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,11 +51,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun observerUserData() {
-        userViewModel.userLiveData.observe(viewLifecycleOwner, Observer { user ->
+        userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
             user?.let {
                 binding.tvName.text = user.name
                 binding.edtName.setText("")
             }
-        })
+        }
     }
 }

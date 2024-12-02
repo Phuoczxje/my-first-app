@@ -1,28 +1,24 @@
-package com.example.myfirstapp.fragments
+package com.example.myfirstapp.screens.main.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myfirstapp.adapters.UserAdapter
 import com.example.myfirstapp.databinding.FragmentFriendsBinding
-import com.example.myfirstapp.models.User
-import com.example.myfirstapp.viewmodels.UserViewModel
-import kotlinx.coroutines.launch
+import com.example.myfirstapp.screens.main.data.models.User
+import com.example.myfirstapp.screens.main.ui.adapter.UserAdapter
 import org.koin.android.ext.android.inject
 
 class FriendsFragment : Fragment() {
     private lateinit var binding: FragmentFriendsBinding
-    private lateinit var userAdapter: UserAdapter
 
-    private val userViewModel: UserViewModel by inject()
-    private var users: List<User> = emptyList()
+    private var users: MutableList<User> = mutableListOf()
+    private val userAdapter by lazy(LazyThreadSafetyMode.NONE) { UserAdapter(users) }
+    private val userViewModel by inject<UserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +26,6 @@ class FriendsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFriendsBinding.inflate(inflater, container, false)
-        userAdapter = UserAdapter(users)
 
         val view = binding.root
         return view
@@ -46,18 +41,18 @@ class FriendsFragment : Fragment() {
             )
         }
 
-        observerUsersData()
         userViewModel.getUsers()
+        observerUsersData()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observerUsersData() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                userViewModel.userState.collect { uiState ->
-                    users = uiState
-                    userAdapter.updateUsers(users)
-                }
+        userViewModel.usersLiveData.observe(viewLifecycleOwner) { userList ->
+            users.apply {
+                clear()
+                addAll(userList)
             }
+            userAdapter.notifyDataSetChanged()
         }
     }
 }

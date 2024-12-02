@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities
+package com.example.myfirstapp.screens.main.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.myfirstapp.R
 import com.example.myfirstapp.databinding.ActivityMainBinding
-import com.example.myfirstapp.fragments.FriendsFragment
-import com.example.myfirstapp.fragments.NotificationsFragment
-import com.example.myfirstapp.fragments.ProfileFragment
-import com.example.myfirstapp.fragments.SettingsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : FragmentActivity() {

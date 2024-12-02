@@ -1,4 +1,4 @@
-package com.example.myfirstapp.models
+package com.example.myfirstapp.screens.main.data.models
 
 data class Address(
     val city: String,

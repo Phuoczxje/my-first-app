@@ -1,7 +1,7 @@
-package com.example.myfirstapp.services
+package com.example.myfirstapp.screens.main.data.remote
 
 
-import com.example.myfirstapp.models.User
+import com.example.myfirstapp.screens.main.data.models.User
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH

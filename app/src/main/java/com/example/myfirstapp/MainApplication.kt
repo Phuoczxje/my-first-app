@@ -1,8 +1,7 @@
 package com.example.myfirstapp
 
 import android.app.Application
-import com.example.myfirstapp.di.apiModule
-import com.example.myfirstapp.di.userModule
+import com.example.myfirstapp.common.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -12,7 +11,7 @@ class MainApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@MainApplication)
-            modules(userModule, apiModule)
+            modules(appModule)
         }
     }
 }
