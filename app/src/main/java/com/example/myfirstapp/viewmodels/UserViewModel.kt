@@ -6,19 +6,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfirstapp.models.User
 import com.example.myfirstapp.repo.UserRepo
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val userRepo: UserRepo) : ViewModel() {
     private val _userLiveData = MutableLiveData<User?>()
     val userLiveData: LiveData<User?> = _userLiveData
 
-    private val _userListLiveData = MutableLiveData<List<User>?>()
-    val userListLiveData: LiveData<List<User>?> = _userListLiveData
+    private val _userState = MutableStateFlow<List<User>>(emptyList())
+    val userState: StateFlow<List<User>> = _userState
 
     fun getUsers() {
         viewModelScope.launch {
             userRepo.getUsers().collect { userList ->
-                _userListLiveData.value = userList
+                _userState.value = userList
             }
         }
     }

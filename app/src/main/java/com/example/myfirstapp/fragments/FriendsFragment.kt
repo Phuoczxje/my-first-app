@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfirstapp.adapters.UserAdapter
 import com.example.myfirstapp.databinding.FragmentFriendsBinding
 import com.example.myfirstapp.models.User
 import com.example.myfirstapp.viewmodels.UserViewModel
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class FriendsFragment : Fragment() {
@@ -48,11 +51,13 @@ class FriendsFragment : Fragment() {
     }
 
     private fun observerUsersData() {
-        userViewModel.userListLiveData.observe(viewLifecycleOwner, Observer { userList ->
-            userList?.let {
-                users = userList
-                userAdapter.updateUsers(users)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                userViewModel.userState.collect { uiState ->
+                    users = uiState
+                    userAdapter.updateUsers(users)
+                }
             }
-        })
+        }
     }
 }
