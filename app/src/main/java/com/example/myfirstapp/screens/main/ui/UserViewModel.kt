@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myfirstapp.screens.main.data.models.User
-import com.example.myfirstapp.screens.main.data.repo.UserRepo
+import com.example.myfirstapp.screens.main.data.repo.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class UserViewModel(
-    private val userRepo: UserRepo,
+    private val userRepo: UserRepository,
 ) : ViewModel() {
     private val _userLiveData = MutableLiveData<User?>()
     val userLiveData: LiveData<User?> = _userLiveData
@@ -27,7 +27,7 @@ class UserViewModel(
         }
     }
 
-    fun getUsername(id: Int) {
+    fun getUsername(id: Long) {
         viewModelScope.launch {
             userRepo.getUser(id).collect { user ->
                 _userLiveData.value = user
@@ -35,9 +35,9 @@ class UserViewModel(
         }
     }
 
-    fun updateUser(id: Int, updateUser: User) {
+    fun updateUser(updateUser: User) {
         viewModelScope.launch {
-            userRepo.updateUser(id, updateUser).collect { user ->
+            userRepo.updateUser(updateUser).collect { user ->
                 _userLiveData.value = user
             }
         }

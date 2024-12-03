@@ -1,29 +1,26 @@
 package com.example.myfirstapp.screens.main.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.myfirstapp.screens.main.data.models.User
+import com.example.myfirstapp.screens.main.data.local.entity.UserEntity
 
 @Dao
 interface UserDao {
     @Transaction
     @Query("SELECT * FROM users")
-    suspend fun getAllUsers(): List<User>
+    suspend fun getUsers(): List<UserEntity>
 
-    @Insert
-    suspend fun insertUser(user: User)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUsers(users: List<User>)
+    @Transaction
+    @Query("SELECT * FROM users WHERE id=:id")
+    suspend fun getUser(id: Long): UserEntity?
 
     @Update
-    suspend fun updateUser(user: User)
+    suspend fun updateUser(user: UserEntity): Int
 
-    @Delete
-    suspend fun deleteUser(user: User)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUsers(users: List<UserEntity>)
 }

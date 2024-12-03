@@ -1,12 +1,20 @@
 package com.example.myfirstapp.common.di
 
+import android.app.Application
 import androidx.room.Room
-import com.example.myfirstapp.common.database.AppDatabase
+import com.example.myfirstapp.MainApplication
+import com.example.myfirstapp.screens.main.data.local.AppDatabase
+import com.example.myfirstapp.screens.main.data.local.LocalUserDataSource
 import com.example.myfirstapp.screens.main.data.remote.ApiService
-import com.example.myfirstapp.screens.main.data.repo.UserRepo
+import com.example.myfirstapp.screens.main.data.remote.RemoteUserDataSource
+import com.example.myfirstapp.screens.main.data.repo.UserRepoImpl
+import com.example.myfirstapp.screens.main.data.repo.UserRepository
 import com.example.myfirstapp.screens.main.ui.UserViewModel
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -35,14 +43,16 @@ val appModule = module {
     single {
         get<Retrofit>().create(ApiService::class.java)
     }
-
+    
     single {
-        Room.databaseBuilder(get(), AppDatabase::class.java, "database")
+        Room.databaseBuilder(androidContext(), AppDatabase::class.java, "database")
             .build()
     }
 
     single { get<AppDatabase>().userDao() }
-
-    single { UserRepo(get(), get()) }
+    single { Dispatchers.IO }
+    single { LocalUserDataSource(get(), get()) }
+    single { RemoteUserDataSource(get(), get()) }
+    single<UserRepository> { UserRepoImpl(get(), get()) }
     viewModel { UserViewModel(get()) }
 }

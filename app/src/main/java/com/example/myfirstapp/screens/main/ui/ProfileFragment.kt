@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
         val updateUser = userViewModel.userLiveData.value?.copy(name = name)
 
         updateUser?.let {
-            userViewModel.updateUser(1, updateUser)
+            userViewModel.updateUser(updateUser)
         }
     }
 
