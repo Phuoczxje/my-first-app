@@ -28,6 +28,25 @@ class MainActivity : FragmentActivity() {
         SettingsFragment()
     )
 
+    private val adSize: AdSize
+        get() {
+            val displayMetrics = this.resources.displayMetrics
+            val adWidthPixels =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    val windowMetrics: WindowMetrics =
+                        this.windowManager.currentWindowMetrics
+                    windowMetrics.bounds.width()
+                } else {
+                    displayMetrics.widthPixels
+                }
+            val density = displayMetrics.density
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+                this,
+                adWidth
+            )
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,49 +55,32 @@ class MainActivity : FragmentActivity() {
             val pagerAdapter = MainPagerAdapter(this@MainActivity)
             vpMain.adapter = pagerAdapter
         }
-
         val view = binding.root
-
+        
         setContentView(view)
 
-        loadBanner()
         setupTabLayoutWithPager()
     }
 
-    public override fun onPause() {
-        super.onPause()
-        adView?.pause()
+    override fun onStart() {
+        super.onStart()
+        loadBanner()
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
         adView?.resume()
     }
 
-    public override fun onDestroy() {
+    override fun onPause() {
+        super.onPause()
+        adView?.pause()
+    }
+
+    override fun onDestroy() {
         super.onDestroy()
         adView?.destroy()
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
-    private val adSize: AdSize
-        get() {
-            val displayMetrics = resources.displayMetrics
-            val adWidthPixels =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    val windowMetrics: WindowMetrics = this.windowManager.currentWindowMetrics
-                    windowMetrics.bounds.width()
-                } else {
-                    displayMetrics.widthPixels
-                }
-            val density = displayMetrics.density
-            val adWidth = (adWidthPixels / density).toInt()
-            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
-        }
 
     private fun loadBanner() {
         val adView = AdView(this)
@@ -94,6 +96,11 @@ class MainActivity : FragmentActivity() {
 
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun addListenerToAdView() {

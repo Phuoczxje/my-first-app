@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfirstapp.databinding.FragmentFriendsBinding
 import com.example.myfirstapp.screens.main.data.models.User
@@ -34,11 +33,9 @@ class FriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            rcvMain.setHasFixedSize(false)
             rcvMain.layoutManager = LinearLayoutManager(this.root.context)
             rcvMain.adapter = userAdapter
-            rcvMain.addItemDecoration(
-                DividerItemDecoration(rcvMain.context, DividerItemDecoration.VERTICAL)
-            )
         }
 
         userViewModel.getUsers()

@@ -8,21 +8,21 @@
     android:orientation="vertical"
     tools:context=".screens.main.ui.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/adMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpMain"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_0dp"
-        android:layout_weight="1"
-        tools:ignore="InefficientWeight" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tlMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/adMain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp" />
+
 </LinearLayout>

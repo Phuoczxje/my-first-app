@@ -1,6 +1,8 @@
 package com.example.myfirstapp.common.di
 
+import android.app.Application
 import androidx.room.Room
+import com.example.myfirstapp.MainApplication
 import com.example.myfirstapp.screens.main.data.local.AppDatabase
 import com.example.myfirstapp.screens.main.data.local.LocalUserDataSource
 import com.example.myfirstapp.screens.main.data.remote.ApiService
@@ -11,6 +13,7 @@ import com.example.myfirstapp.screens.main.ui.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -40,7 +43,7 @@ val appModule = module {
     single {
         get<Retrofit>().create(ApiService::class.java)
     }
-
+    
     single {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "database")
             .build()
