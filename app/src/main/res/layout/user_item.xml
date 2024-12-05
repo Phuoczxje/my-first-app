@@ -6,7 +6,7 @@
     android:padding="@dimen/_10dp">
 
     <TextView
-        android:id="@+id/itemName"
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5dp"
@@ -14,10 +14,15 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/itemEmail"
+        android:id="@+id/tvEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5dp"
         android:textSize="@dimen/_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/black" />
 
 </LinearLayout>
