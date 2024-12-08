@@ -8,13 +8,15 @@ import com.example.myfirstapp.screens.main.data.models.User
 
 class UserAdapter(private var items: List<User>) :
     RecyclerView.Adapter<UserAdapter.ItemViewHolder>() {
-    private lateinit var binding: UserItemBinding
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder {
-        binding = UserItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            UserItemBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
         return ItemViewHolder(binding)
     }
 
@@ -24,7 +26,8 @@ class UserAdapter(private var items: List<User>) :
 
     override fun getItemCount(): Int = items.size
 
-    inner class ItemViewHolder(binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ItemViewHolder(private val binding: UserItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun binItem(item: User) {
             binding.apply {
                 tvName.text = item.name
