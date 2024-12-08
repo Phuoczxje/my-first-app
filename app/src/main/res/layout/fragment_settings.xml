@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.main.ui.SettingsFragment">
 
     <Button
-        android:id="@+id/btnSettings"
+        android:id="@+id/btnIntersAd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/settingsTitle" />
-</FrameLayout>
+        android:layout_centerInParent="true"
+        android:text="@string/interstitial" />
+
+    <Button
+        android:id="@+id/btnRewardAd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnIntersAd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_40dp"
+        android:text="@string/reward" />
+
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRewardAd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_56dp"
+        android:text="@string/balance"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_24sp">
+
+    </TextView>
+</RelativeLayout>

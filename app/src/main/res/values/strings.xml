@@ -13,4 +13,7 @@
     <string name="title">Title</string>
     <string name="body">Body</string>
     <string name="action">Action</string>
+    <string name="interstitial">Interstitial Ad</string>
+    <string name="reward">Reward Ad</string>
+    <string name="balance">Số dư: 0 đồng</string>
 </resources>
