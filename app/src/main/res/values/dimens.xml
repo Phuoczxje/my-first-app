@@ -13,6 +13,7 @@
     <dimen name="_56dp">56dp</dimen>
     <dimen name="_100dp">100dp</dimen>
 
+    <dimen name="_24sp">24sp</dimen>
     <dimen name="_16sp">16sp</dimen>
     <dimen name="_14sp">14sp</dimen>
     <dimen name="_12sp">12sp</dimen>
