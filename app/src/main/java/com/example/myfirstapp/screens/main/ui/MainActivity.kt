@@ -16,7 +16,8 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.tabs.TabLayoutMediator
 
-private const val AD_UNIT_ID = "ca-app-pub-3940256099942544/9214589741"
+private const val LOG_TAG = "Admob"
+private const val BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/9214589741"
 
 class MainActivity : FragmentActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -50,15 +51,13 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val pagerAdapter = MainPagerAdapter(this@MainActivity)
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.apply {
-            val pagerAdapter = MainPagerAdapter(this@MainActivity)
             vpMain.adapter = pagerAdapter
         }
-        val view = binding.root
-        
-        setContentView(view)
 
+        setContentView(binding.root)
         setupTabLayoutWithPager()
     }
 
@@ -84,18 +83,19 @@ class MainActivity : FragmentActivity() {
 
     private fun loadBanner() {
         val adView = AdView(this)
-        adView.adUnitId = AD_UNIT_ID
+        adView.adUnitId = BANNER_AD_UNIT_ID
         adView.setAdSize(adSize)
+
         this.adView = adView
         addListenerToAdView()
 
-        binding.apply {
-            adMain.removeAllViews()
-            adMain.addView(adView)
-        }
-
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+
+        binding.flBannerAd.run {
+            removeAllViews()
+            addView(adView)
+        }
     }
 
     override fun onBackPressed() {
@@ -106,24 +106,24 @@ class MainActivity : FragmentActivity() {
     private fun addListenerToAdView() {
         this.adView?.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                Log.d("AdMob", "Ad loaded successfully.")
+                Log.d(LOG_TAG, "Ad loaded successfully.")
             }
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.e("AdMob", "Failed to load ad: ${adError.message}")
-                Log.e("AdMob", "Failed to load ad: ${adError.code}")
+                Log.e(LOG_TAG, "Failed to load ad: ${adError.message}")
+                Log.e(LOG_TAG, "Failed to load ad: ${adError.code}")
             }
 
             override fun onAdOpened() {
-                Log.d("AdMob", "Ad opened.")
+                Log.d(LOG_TAG, "Ad opened.")
             }
 
             override fun onAdClicked() {
-                Log.d("AdMob", "Ad clicked.")
+                Log.d(LOG_TAG, "Ad clicked.")
             }
 
             override fun onAdClosed() {
-                Log.d("AdMob", "Ad closed.")
+                Log.d(LOG_TAG, "Ad closed.")
             }
         }
     }

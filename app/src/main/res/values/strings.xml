@@ -8,4 +8,9 @@
     <string name="productsTitle">Products</string>
     <string name="backDescription">Back Button</string>
     <string name="updateTitle">Update</string>
+    <string name="btnHolderTitle">Button</string>
+    <string name="descriptionTitle">Description</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="action">Action</string>
 </resources>

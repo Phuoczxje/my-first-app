@@ -26,10 +26,10 @@ class AppOpenAdManager(private val mainApplication: MainApplication) :
 
     init {
         mainApplication.registerActivityLifecycleCallbacks(this)
-        loadAd()
     }
 
     override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+        loadAd()
     }
 
     override fun onActivityStarted(p0: Activity) {

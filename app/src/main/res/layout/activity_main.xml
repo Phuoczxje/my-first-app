@@ -21,8 +21,8 @@
         android:layout_weight="1" />
 
     <FrameLayout
-        android:id="@+id/adMain"
+        android:id="@+id/flBannerAd"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_56dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
